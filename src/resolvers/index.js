@@ -124,9 +124,6 @@ const resolvers = {
 
 	Mutation: {
 		createSite: async (obj, { site }, context) => {
-			// database queries go here.
-			console.log(site);
-			console.log(site.tl_address);
 			try {
 				const newSite = await db.query(`INSERT INTO sites (site_number,
 					tl_address,
@@ -151,13 +148,6 @@ const resolvers = {
 			} catch (e) {
 				console.log(e.stack);
 			}
-			// const newSiteList = [
-			// 	...sites,
-			// 	site,
-			// 	// new movie data goes here
-			// ];
-			// // Return data as expected in schema
-			// return newSiteList;
 		},
 	},
 
