@@ -1,4 +1,6 @@
 const app = require('./app');
+const cors = require('cors');
+const helmet = require('helmet');
 const { PORT } = require('./config');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs } = require('./typeDefs/index');
@@ -12,6 +14,8 @@ const server = new ApolloServer({
 });
 // app.set('db', pool);
 server.applyMiddleware({ app });
+app.use(cors());
+app.use(helmet());
 
 app.listen(PORT, () => {
 	console.log(`Server started at http://localhost:4000${server.graphqlPath}`);

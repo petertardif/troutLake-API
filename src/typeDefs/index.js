@@ -56,7 +56,12 @@ const typeDefs = gql`
 	}
 
 	input UserInput {
-		id: ID
+		id: Int
+		last_name: String!
+		first_name: String!
+		email: String!
+		password: String!
+		role: Role
 	}
 
 	input SiteInput {
@@ -72,8 +77,39 @@ const typeDefs = gql`
 		owners_association: Association!
 	}
 
+	input BillsInput {
+		year: Int!
+		bill_amount: String!
+		bill_type: BillType!
+		bill_due_date: Date!
+		bill_status: BillStatus!
+		paid_in_full_date: Date
+		site_id: Int!
+		updatedAt: Date
+	}
+
+	input PaymentInput {
+		id: ID
+		amount: Float!
+		payment_type: PaymentType!
+		payment_status: PaymentStatus!
+		paid_by: Int
+		bill_id: Int
+	}
+
 	type Mutation {
+		createUser(user: UserInput): [User]
 		createSite(site: SiteInput): [Site]
+		createBills(bill: BillsInput): [Bill]
+		createPayment(payment: PaymentInput): [Payment]
+		updateUser(user: UserInput): [User]
+		updateSite(
+			id: ID!
+			tl_phone_number: String
+			trout_lake_water: Boolean
+			user_id: Int
+		): [Site]
+		updatePayment(payment: PaymentInput): [Payment]
 	}
 
 	type User {
@@ -131,8 +167,9 @@ const typeDefs = gql`
 		payment_date: Date!
 		payment_type: PaymentType!
 		payment_status: PaymentStatus!
-		paid_by: [User]
+		paid_by: Int
 		bill_id: Int
+		users: [User]
 	}
 `;
 
