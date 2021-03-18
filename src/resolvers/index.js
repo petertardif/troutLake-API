@@ -155,7 +155,7 @@ const resolvers = {
 				console.log(e.stack);
 			}
 		},
-		updateUser: async (ob, { user }, context) => {
+		updateUser: async (obj, { user }, context) => {
 			try {
 				const updatedDate = new Date().toISOString();
 				const statement =
@@ -217,6 +217,7 @@ const resolvers = {
 				console.log(e.stack);
 			}
 		},
+		// TODO Finish creating bills
 		createBills: async (obj, { bill }, context) => {
 			try {
 				const tlWaterSites = await db.query(
